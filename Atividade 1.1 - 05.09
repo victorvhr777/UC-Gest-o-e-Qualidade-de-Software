@@ -1,0 +1,12 @@
+def is_par(n):
+
+  return n % 2 == 0
+
+
+print (is_par(4))
+print (is_par(7))
+print (is_par(0))
+print (is_par(-1))
+print (is_par(-8))
+print (is_par(80))
+print (is_par(777))  
