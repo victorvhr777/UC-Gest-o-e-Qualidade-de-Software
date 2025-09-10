@@ -1,0 +1,39 @@
+class Conta:
+    def __init__(self):
+        self.saldo = 0   # saldo inicial
+
+    def depositar(self, amount):
+        if amount < 0:
+            print("Erro: não é permitido depositar valores negativos.")
+            return
+        self.saldo += amount
+
+    def sacar(self, amount):
+        if amount < 0:
+            print("Erro: não é permitido sacar valores negativos.")
+            return
+        if amount > self.saldo:
+            print("Erro: saldo insuficiente.")
+            return
+        self.saldo -= amount
+
+# TESTES
+
+conta = Conta()   
+
+# Depósito válido
+conta.depositar(100)
+print("Saldo após depósito:", conta.saldo)
+
+# Saque válido
+conta.sacar(30)
+print("Saldo após saque:", conta.saldo)
+
+# Saque maior que o saldo
+conta.sacar(200)  # mostra erro
+
+# Depósito inválido (valor negativo)
+conta.depositar(-10)  # mostra erro
+
+# Saque inválido (valor negativo)
+conta.sacar(-5)  # mostra erro
