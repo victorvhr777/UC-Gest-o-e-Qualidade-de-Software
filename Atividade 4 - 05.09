@@ -1,0 +1,23 @@
+def buscar_clima(cidade: str) -> float:
+    url = f"https://api.exemplo/clima?cidade={cidade}"
+    resposta = requests.get(url)
+    dados = resposta.json()
+    if "temperatura" not in dados:
+        raise ValueError("Resposta inválida: sem temperatura")
+    return dados["temperatura"]
+
+class TestBuscarClima(unittest.TestCase):
+
+    @patch("requests.get")
+    def test_retorna_temperatura(self, mock_get):
+        mock_get.return_value.json.return_value = {"temperatura": 25}
+        temp = buscar_clima("São Paulo")
+        self.assertEqual(temp, 25)
+
+    @patch("requests.get")
+    def test_resposta_invalida(self, mock_get):
+        mock_get.return_value.json.return_value = {}
+        with self.assertRaises(ValueError):
+            buscar_clima("São Paulo")
+
+unittest.main(argv=[''], exit=False)
