@@ -1,0 +1,235 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/bielcarvalhoz/Faculdade/blob/main/Testes_Python.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Testes"
+      ],
+      "metadata": {
+        "id": "re_CUn79bVZI"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install pytest\n",
+        "import pytest"
+      ],
+      "metadata": {
+        "id": "OwH0hFG2fk7E",
+        "outputId": "255e043e-4325-4dd4-92a1-8053a5ce53d8",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: pytest in /usr/local/lib/python3.12/dist-packages (8.4.2)\n",
+            "Requirement already satisfied: iniconfig>=1 in /usr/local/lib/python3.12/dist-packages (from pytest) (2.1.0)\n",
+            "Requirement already satisfied: packaging>=20 in /usr/local/lib/python3.12/dist-packages (from pytest) (25.0)\n",
+            "Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.12/dist-packages (from pytest) (1.6.0)\n",
+            "Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.12/dist-packages (from pytest) (2.19.2)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%writefile utils.py\n",
+        "\n",
+        "def maior(a:int, b:int) -> int:\n",
+        "  return a if a >= b else b\n",
+        "\n",
+        "def inverter_string(texto:str) -> str:\n",
+        "  return texto[::-1]\n",
+        "\n",
+        "def valida_cpf(cpf:str) -> bool:\n",
+        "  return cpf.isdigit() and len(cpf) == 11"
+      ],
+      "metadata": {
+        "id": "xMKrSsj2gkvP",
+        "outputId": "a8956b9d-1543-441a-dd80-70d558afbcf6",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Writing utils.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Atividade 1"
+      ],
+      "metadata": {
+        "id": "fm3QnrV5c5bN"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%writefile test_maior.py\n",
+        "from utils import maior\n",
+        "\n",
+        "def test_maior():\n",
+        "  assert maior(2,4) == 4\n",
+        "  assert maior(10,2) == 10\n"
+      ],
+      "metadata": {
+        "id": "ZxRefvAlbdCw",
+        "outputId": "7c8a1755-b462-463d-bd9a-016a094e47be",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Overwriting test_maior.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Atividade 2"
+      ],
+      "metadata": {
+        "id": "cVAte4QOc8Xp"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%writefile test_inverter_string.py\n",
+        "\n",
+        "from utils import inverter_string\n",
+        "\n",
+        "def test_inverter_string():\n",
+        "  assert inverter_string(\"teste\") == \"etset\"\n",
+        "  assert inverter_string(\"opa\") == \"apo\"\n"
+      ],
+      "metadata": {
+        "id": "LRLzgOF5c_Gl",
+        "outputId": "137f8b79-d402-4d55-9301-430b840ec3c9",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Writing test_inverter_string.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Atividade 3"
+      ],
+      "metadata": {
+        "id": "hMdb42u0dl1j"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%writefile test_valida_cpf.py\n",
+        "\n",
+        "from utils import valida_cpf\n",
+        "\n",
+        "def test_valida_cpf():\n",
+        "  assert valida_cpf(\"2355\") == False\n",
+        "  assert valida_cpf(\"58764738279\") == True\n",
+        "  assert valida_cpf(\"asdf\") == False\n"
+      ],
+      "metadata": {
+        "id": "H5DXuLy6dnSH",
+        "outputId": "e5a93d8c-2e19-4cdf-a55c-99b44109dd69",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Overwriting test_valida_cpf.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pytest -q"
+      ],
+      "metadata": {
+        "id": "rvrpYWx6hJaZ",
+        "outputId": "c3b97bda-00a2-46c7-b63a-d658db546be3",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m                                                                      [100%]\u001b[0m\n",
+            "\u001b[32m\u001b[32m\u001b[1m3 passed\u001b[0m\u001b[32m in 0.01s\u001b[0m\u001b[0m\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "Welcome To Colab",
+      "toc_visible": true,
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
